@@ -1,0 +1,12 @@
+{
+  "name": "yamzz-market",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "firebase-admin": "^14.5.0"
+  }
+}
