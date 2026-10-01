@@ -1,0 +1,19 @@
+{
+  "name": "yamzz-market-android",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "android": "npx cap open android",
+    "sync": "npx cap sync android",
+    "build": "npx cap copy android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/push-notifications": "^7.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "typescript": "^5.7.3"
+  }
+}

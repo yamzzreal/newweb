@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+mobile-app/node_modules/
+
+# Vercel
+.vercel/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Firebase / service account secrets
+service-account*.json
+firebase-service-account*.json
+*-service-account*.json
+
+# Build outputs
+dist/
+build/
+out/
+coverage/
+
+# Android / Gradle
+mobile-app/android/.gradle/
+mobile-app/android/build/
+mobile-app/android/app/build/
+mobile-app/android/.idea/
+mobile-app/android/local.properties
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+mobile-app/www/js/*.backup

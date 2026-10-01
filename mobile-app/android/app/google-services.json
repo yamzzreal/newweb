@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "881160646773",
+    "project_id": "yamzzmarket-574b0",
+    "storage_bucket": "yamzzmarket-574b0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881160646773:android:becaf3e28664339c43883c",
+        "android_client_info": {
+          "package_name": "id.myid.yamzzmarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtGF4Fv4GW0ZtiW_RriavgbuD8CxDXaFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
