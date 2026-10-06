@@ -997,31 +997,18 @@ function createProductCard(product, index) {
 
 
         <button
-            type="button"
-            class="btn btn-primary btn-full product-buy-btn"
-            data-product-index="${index}"
-            ${isOutOfStock ? "disabled" : ""}
-        >
-
-            ${
-                isOutOfStock
-                ?
-                `
-                <i class="fa-solid fa-ban"></i>
-                Stok Habis
-                `
-                :
-                `
-                <i class="fa-solid fa-cart-shopping"></i>
-                Beli Sekarang
-                `
-            }
-
-        </button>
-
-      <button
     type="button"
     class="btn btn-primary btn-full product-buy-btn"
+    data-product-index="${index}"
+    ${isOutOfStock ? "disabled" : ""}
+>
+    <i class="fa-solid fa-cart-shopping"></i>
+    Beli Sekarang
+</button>
+
+<button
+    type="button"
+    class="btn btn-full product-image-detail"
     data-product-image="${escapeAttribute(image)}"
     data-product-name="${escapeAttribute(name)}"
 >
@@ -1057,6 +1044,27 @@ function createProductCard(product, index) {
 
             }
         );
+       const detailButton =
+    card.querySelector(".product-image-detail");
+
+if (detailButton && image) {
+
+    detailButton.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            openProductImage(
+                image,
+                name
+            );
+
+        }
+    );
+
+}
 
     }
 
