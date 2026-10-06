@@ -1006,46 +1006,55 @@ function createProductCard(product, index) {
     Beli Sekarang
 </button>
 
+${image ? `
 <button
     type="button"
     class="btn btn-full product-image-detail"
-    data-product-image="${escapeAttribute(image)}"
-    data-product-name="${escapeAttribute(name)}"
 >
     <i class="fa-solid fa-image"></i>
     Lihat Detail
 </button>
+` : ""}
 
     </div>
 
 `;
 
 
-    /*
-     * Tombol beli
-     */
+/*
+ * Tombol beli
+ */
 
-    const buyButton =
-        card.querySelector(
-            ".product-buy-btn"
-        );
+const buyButton =
+    card.querySelector(
+        ".product-buy-btn"
+    );
+
+if (buyButton && !isOutOfStock && DB.site?.maintenance !== true && DB.site?.storeOffline !== true) {
+
+    buyButton.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            buyProduct(product);
+
+        }
+    );
+
+}
 
 
-    if (buyButton && !isOutOfStock && DB.site?.maintenance!==true && DB.site?.storeOffline!==true) {
+/*
+ * Tombol detail gambar
+ */
 
-        buyButton.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                buyProduct(product);
-
-            }
-        );
-       const detailButton =
-    card.querySelector(".product-image-detail");
+const detailButton =
+    card.querySelector(
+        ".product-image-detail"
+    );
 
 if (detailButton && image) {
 
@@ -1066,7 +1075,37 @@ if (detailButton && image) {
 
 }
 
+
+/*
+ * Klik card
+ */
+
+card.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target.closest(
+                "button"
+            )
+        ) {
+            return;
+        }
+
+        if (
+            !isOutOfStock &&
+            DB.site?.maintenance !== true &&
+            DB.site?.storeOffline !== true
+        ) {
+
+            openProductModal(
+                product
+            );
+
+        }
+
     }
+);
 
 
     /*
