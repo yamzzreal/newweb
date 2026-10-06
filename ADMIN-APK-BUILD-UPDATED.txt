@@ -1,0 +1,19 @@
+YAMZZ MARKET - ADMIN APK UPDATED
+
+Source admin-app sudah diperbarui dan versionCode/versionName dinaikkan ke:
+- versionCode: 4
+- versionName: 1.2.1
+
+Catatan:
+APK binary tidak dapat dikompilasi di environment pembuatan ZIP ini karena Gradle 8.11.1 perlu mengunduh distribution dari services.gradle.org dan environment ini tidak memiliki akses internet.
+
+Build di Termux:
+1. cd ke folder admin-app
+2. chmod +x build-admin-apk-termux.sh
+3. ./build-admin-apk-termux.sh
+
+Hasil:
+admin-app/android/app/build/outputs/apk/release/app-release.apk
+
+APK menggunakan server URL yang sudah ada di capacitor.config.ts:
+https://jasteb.yamzzmarket.my.id/admin.html
