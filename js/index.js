@@ -915,45 +915,123 @@ function createProductCard(product, index) {
 
     card.innerHTML = `
 
-        <div class="product-image">
+    <div class="product-image">
 
-    ${
-        image
-        ?
-        `
-        <img
-            src="${escapeAttribute(image)}"
-            alt="${escapeAttribute(name)}"
-            loading="lazy"
-            onerror="this.style.display='none';"
-        >
+        ${
+            image
+            ?
+            `
+            <img
+                src="${escapeAttribute(image)}"
+                alt="${escapeAttribute(name)}"
+                loading="lazy"
+                onerror="this.style.display='none';"
+            >
+
+            <button
+                type="button"
+                class="product-image-detail"
+                onclick="openProductImage('${escapeAttribute(image)}', '${escapeAttribute(name)}')"
+                aria-label="Perbesar gambar ${escapeAttribute(name)}"
+            >
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                <span>Detail</span>
+            </button>
+            `
+            :
+            `
+            <div class="product-image-placeholder">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            `
+        }
+
+        <span class="product-badge">
+            ${escapeHTML(categoryName)}
+        </span>
+
+    </div>
+
+
+    <div class="product-body">
+
+        <span class="product-category">
+            ${escapeHTML(categoryName)}
+        </span>
+
+
+        <h3 class="product-name">
+            ${escapeHTML(name)}
+        </h3>
+
+
+        <p class="product-description">
+            ${escapeHTML(description)}
+        </p>
+
+
+        <div class="product-bottom">
+
+            <div class="product-price">
+
+                <span>
+                    Mulai dari
+                </span>
+
+                <strong>
+                    ${formatRupiah(price)}
+                </strong>
+
+            </div>
+
+
+            <div class="product-stock">
+
+                ${
+                    isOutOfStock
+                    ?
+                    `
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    Habis
+                    `
+                    :
+                    `
+                    <i class="fa-solid fa-circle-check"></i>
+                    ${stock} tersedia
+                    `
+                }
+
+            </div>
+
+        </div>
+
 
         <button
             type="button"
-            class="product-image-detail"
-            onclick="openProductImage(
-                '${escapeAttribute(image)}',
-                '${escapeAttribute(name)}'
-            )"
-            aria-label="Lihat detail gambar"
+            class="btn btn-primary btn-full product-buy-btn"
+            data-product-index="${index}"
+            ${isOutOfStock ? "disabled" : ""}
         >
-            <i class="fa-solid fa-magnifying-glass-plus"></i>
-            <span>Detail</span>
+
+            ${
+                isOutOfStock
+                ?
+                `
+                <i class="fa-solid fa-ban"></i>
+                Stok Habis
+                `
+                :
+                `
+                <i class="fa-solid fa-cart-shopping"></i>
+                Beli Sekarang
+                `
+            }
+
         </button>
-        `
-        :
-        `
-        <div class="product-image-placeholder">
-            <i class="fa-solid fa-box-open"></i>
-        </div>
-        `
-    }
 
-    <span class="product-badge">
-        ${escapeHTML(categoryName)}
-    </span>
+    </div>
 
-</div>`;
+`;
 
 
     /*
