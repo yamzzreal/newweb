@@ -927,16 +927,6 @@ function createProductCard(product, index) {
                 loading="lazy"
                 onerror="this.style.display='none';"
             >
-
-            <button
-                type="button"
-                class="product-image-detail"
-                onclick="openProductImage('${escapeAttribute(image)}', '${escapeAttribute(name)}')"
-                aria-label="Perbesar gambar ${escapeAttribute(name)}"
-            >
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-                <span>Detail</span>
-            </button>
             `
             :
             `
@@ -1028,6 +1018,16 @@ function createProductCard(product, index) {
             }
 
         </button>
+
+      <button
+    type="button"
+    class="btn btn-primary btn-full product-buy-btn"
+    data-product-image="${escapeAttribute(image)}"
+    data-product-name="${escapeAttribute(name)}"
+>
+    <i class="fa-solid fa-image"></i>
+    Lihat Detail
+</button>
 
     </div>
 
