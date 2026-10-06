@@ -915,115 +915,190 @@ function createProductCard(product, index) {
 
     card.innerHTML = `
 
-        <div class="product-image">
+    <div class="product-image">
 
-            ${
-                image
-                ?
-                `
-                <img
-                    src="${escapeAttribute(image)}"
-                    alt="${escapeAttribute(name)}"
-                    loading="lazy"
-                    onerror="this.style.display='none';"
-                >
-                `
-                :
-                `
-                <div class="product-image-placeholder">
-                    <i class="fa-solid fa-box-open"></i>
-                </div>
-                `
-            }
+        ${
+            image
+            ?
+            `
+            <img
+                src="${escapeAttribute(image)}"
+                alt="${escapeAttribute(name)}"
+                loading="lazy"
+                onerror="this.style.display='none';"
+            >
 
-            <span class="product-badge">
-                ${escapeHTML(categoryName)}
-            </span>
+            <button
+                type="button"
+                class="product-image-detail"
+                onclick="openProductImage('${escapeAttribute(image)}', '${escapeAttribute(name)}')"
+                aria-label="Perbesar gambar ${escapeAttribute(name)}"
+            >
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                <span>Detail</span>
+            </button>
+            `
+            :
+            `
+            <div class="product-image-placeholder">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            `
+        }
 
-        </div>
+        <span class="product-badge">
+            ${escapeHTML(categoryName)}
+        </span>
 
-
-        <div class="product-body">
-
-            <span class="product-category">
-                ${escapeHTML(categoryName)}
-            </span>
-
-
-            <h3 class="product-name">
-                ${escapeHTML(name)}
-            </h3>
+    </div>
 
 
-            <p class="product-description">
-                ${escapeHTML(description)}
-            </p>
+    <div class="product-body">
+
+        <span class="product-category">
+            ${escapeHTML(categoryName)}
+        </span>
 
 
-            <div class="product-bottom">
-
-                <div class="product-price">
-
-                    <span>
-                        Mulai dari
-                    </span>
-
-                    <strong>
-                        ${formatRupiah(price)}
-                    </strong>
-
-                </div>
+        <h3 class="product-name">
+            ${escapeHTML(name)}
+        </h3>
 
 
-                <div class="product-stock">
+        <p class="product-description">
+            ${escapeHTML(description)}
+        </p>
 
-                    ${
-                        isOutOfStock
-                        ?
-                        `
-                        <i class="fa-solid fa-circle-xmark"></i>
-                        Habis
-                        `
-                        :
-                        `
-                        <i class="fa-solid fa-circle-check"></i>
-                        ${stock} tersedia
-                        `
-                    }
 
-                </div>
+        <div class="product-bottom">
+
+            <div class="product-price">
+
+                <span>
+                    Mulai dari
+                </span>
+
+                <strong>
+                    ${formatRupiah(price)}
+                </strong>
 
             </div>
 
 
-            <button
-                type="button"
-                class="btn btn-primary btn-full product-buy-btn"
-                data-product-index="${index}"
-                ${isOutOfStock ? "disabled" : ""}
-            >
+            <div class="product-stock">
 
                 ${
                     isOutOfStock
                     ?
                     `
-                    <i class="fa-solid fa-ban"></i>
-                    Stok Habis
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    Habis
                     `
                     :
                     `
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    Beli Sekarang
+                    <i class="fa-solid fa-circle-check"></i>
+                    ${stock} tersedia
                     `
                 }
 
-            </button>
+            </div>
 
         </div>
 
+
+        <button
+            type="button"
+            class="btn btn-primary btn-full product-buy-btn"
+            data-product-index="${index}"
+            ${isOutOfStock ? "disabled" : ""}
+        >
+
+            ${
+                isOutOfStock
+                ?
+                `
+                <i class="fa-solid fa-ban"></i>
+                Stok Habis
+                `
+                :
+                `
+                <i class="fa-solid fa-cart-shopping"></i>
+                Beli Sekarang
+                `
+            }
+
+        </button>
+
+    </div>
+
+`;
+
+function openProductImage(image, name) {
+    const oldPopup = document.getElementById("productImagePopup");
+    if (oldPopup) oldPopup.remove();
+
+    const popup = document.createElement("div");
+
+    popup.id = "productImagePopup";
+    popup.className = "product-image-popup";
+
+    popup.innerHTML = `
+        <div class="product-image-popup-backdrop"></div>
+
+        <div class="product-image-popup-content">
+
+            <button
+                type="button"
+                class="product-image-popup-close"
+                aria-label="Tutup"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <img
+                src="${escapeAttribute(image)}"
+                alt="${escapeAttribute(name)}"
+            >
+
+            <div class="product-image-popup-title">
+                ${escapeHTML(name)}
+            </div>
+
+        </div>
     `;
 
+    document.body.appendChild(popup);
 
+    requestAnimationFrame(() => {
+        popup.classList.add("show");
+    });
+
+    const closePopup = () => {
+        popup.classList.remove("show");
+
+        setTimeout(() => {
+            popup.remove();
+        }, 200);
+    };
+
+    popup.querySelector(".product-image-popup-close")
+        .addEventListener("click", closePopup);
+
+    popup.querySelector(".product-image-popup-backdrop")
+        .addEventListener("click", closePopup);
+
+    popup.querySelector("img")
+        .addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+    document.addEventListener("keydown", function escHandler(e) {
+        if (e.key === "Escape") {
+            closePopup();
+            document.removeEventListener("keydown", escHandler);
+        }
+    });
+}
     /*
      * Tombol beli
      */
