@@ -779,6 +779,34 @@ button {
 }
 
 
+/* PRODUCT IMAGE */
+.product-image {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #071321;
+    border: 1px solid var(--border);
+}
+
+.product-image-wrap {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #071321;
+}
+
+.product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
 /* PRODUCTS */
 
 .product-admin-list {
